@@ -2,22 +2,16 @@
 const express = require("express");
 const multer = require("multer");
 const router = express.Router();
+const { storage } = require("../middleware/middleware");
 
-const { handleFileUpload, handleGetFiles } = require("../controller/controller");
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads')
-    },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now();
-      cb(null,  uniqueSuffix + file.originalname)
-    }
-})
+const { handleFileUpload, getBalance } = require("../controller/controller");
 
 const upload = multer({ storage: storage })
 
-router.post("/upload-files", upload.single("file"), handleFileUpload);
-// router.get("/getfiles", handleGetFiles);
+// File Upload Route
+router.post("/upload", upload.single("file"), handleFileUpload);
 
-module.exports = router;
+// Get Balance Route
+router.post("/balance", getBalance)
+
+module.exports = router

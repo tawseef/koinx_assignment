@@ -9,7 +9,6 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//// to make file location accessable
 app.use("/uploads", express.static("uploads"));
 
 app.use(cors());
