@@ -85,7 +85,7 @@ const deleteFile = (filePath) => {
 // Getting the Balance Function
 const balance = async (time) => {
   try {
-    const allTrades = await getTrades();
+    const allTrades = await getAllTrades();
     if (allTrades) {
       const trades = allTrades.filter((item) => {
         if (new Date(item["utc_time"]) <= new Date(time)) return item;
@@ -119,7 +119,7 @@ const balanceCalculation = (trades) => {
 };
 
 // Getting all trades from the DB
-const getTrades = async () => {
+const getAllTrades = async () => {
   const res = await TradeDB.find();
   if (res.length !== 0) return res;
   else return null;
