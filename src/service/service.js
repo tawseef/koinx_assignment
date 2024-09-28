@@ -73,11 +73,11 @@ const storingInDB = async (data) => {
 
 // Function to delete the file
 const deleteFile = (filePath) => {
-  fs.unlink(filePath, (err) => {
-    if (err) {
-      console.error(`Error deleting file: ${filePath}`, err);
+  fs.unlink(filePath, (error) => {
+    if (error) {
+      throw error
     } else {
-      console.log(`File deleted: ${filePath}`);
+      return `File deleted: ${filePath}`;
     }
   });
 };
